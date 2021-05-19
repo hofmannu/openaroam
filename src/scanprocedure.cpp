@@ -84,6 +84,8 @@ uint32_t scanprocedure::get_nShots() const
 void scanprocedure::run(microscope* mic)
 {
 	isRunning = 1;
+	nameHandler.get_new_count(); // generate new counter for file
+	save_settings();
 
 	// for readability and save settings from start
 	uint32_t nY = get_nY();
@@ -164,6 +166,8 @@ void scanprocedure::save_settings()
 {
 
 	cout << "saving settings is not implemented yet" << endl;
+	
+
 	return;
 }
 

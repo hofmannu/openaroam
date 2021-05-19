@@ -6,7 +6,9 @@
 #include <iostream>
 #include <math.h>
 #include "microscope.h"
+#include "pathhandler.h"
 #include <thread>
+#include <cstring>
 
 using namespace std;
 
@@ -24,6 +26,7 @@ private:
 	uint32_t nSamples = 2048; // number of samples acquired
 	uint32_t nAverages = 1; // number of averages acquired at each grid position
 	bool isExpertMode = 0;
+	string scanName = "unknown";
 
 	float* rawDataUs;
 	bool isRawDataAllocated = 0;
@@ -39,6 +42,8 @@ private:
 	bool isRunning = 0;
 
 	bool flagSaveData = 1;
+
+	pathhandler nameHandler;
 public:
 	scanprocedure();
 	~scanprocedure();
@@ -52,6 +57,7 @@ public:
 	float* get_pvel() {return &vel[0];};
 	float* get_pacc() {return &acc[0];};
 	float* get_pfSampling() {return &fSampling;};
+	string* get_pscanName() {return &scanName;};
 	bool* get_pisExpertMode() {return &isExpertMode;};
 	bool get_isExpertMode() {return isExpertMode;};
 

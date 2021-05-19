@@ -1,3 +1,5 @@
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(OpenGL_GL_PREFERENCE GLVND)
 cmake_policy(SET CMP0079 NEW)
 find_package( Threads )
@@ -46,4 +48,8 @@ add_library(Scanprocedure scanprocedure.cpp)
 target_link_libraries(Scanprocedure PUBLIC
 	Stage
 	Microscope
+	PathHandler
 	${CMAKE_THREAD_LIBS_INIT})
+
+add_library(PathHandler pathhandler.cpp)
+target_link_libraries(PathHandler stdc++fs)
