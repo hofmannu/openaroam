@@ -3,6 +3,11 @@
 ## Installation
 These libraries are required for the software to run on your PC:
 
+*  `hdf5` general purpose library and file format for storing scientific data
+*  `cmake` and `make`
+*  `glfw-x11`, glew used to display stuff
+*  `nlohmann-json` save settings of simulation to json file
+
 To compile the software on your PC run the following lines of code
 ```
 git clone git@github.com:hofmannu/openaroam.git
