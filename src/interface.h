@@ -24,7 +24,10 @@ private:
 
 
 	void HardwareConnection(); // direct access to manipulate the hardware
+	
 	void ScanProcedure(); // scan procedure to acquire images
+	void ScanLivePreview(); // live preview while the actual scan is running
+
 	void SNRScope();
 
 	microscope mic;

@@ -1,11 +1,13 @@
 #include "scanprocedure.h"
 
+// class constructor
 scanprocedure::scanprocedure()
 {
 
 
 }
 
+// class destructor
 scanprocedure::~scanprocedure()
 {
 	free_memory();
@@ -99,16 +101,14 @@ void scanprocedure::run(microscope* mic)
 	origin[0] = center[0] - width[0] / 2;
 	origin[1] = center[1] - width[1] / 2;
 
-	// we save the settings here already because the user might adapt them during the scan
-	save_settings();
+	save_settings(); // save settings to file
 
 	// allocate memory for scan
 	if (isRawDataAllocated)
 		delete[] rawDataUs;
 
 	uint32_t nBScan = nX * nAverages * nSamples;
-	rawDataUs = new float[nBScan];
-
+	rawDataUs = new float[nBScan]; // only contains the memory for a B scan
 
 	for (uint32_t iY = 0; iY < nY; iY++)
 	{
@@ -117,7 +117,7 @@ void scanprocedure::run(microscope* mic)
 
 		if (!(iY % 2)) // forward scan
 			xStage->set_pos(origin[0]);
-		else
+		else // backwards scan
 			xStage->set_pos(origin[0] + res[0] * ((float) nX));
 
 		// for now acquire data by filling array up with random numbers
@@ -129,8 +129,7 @@ void scanprocedure::run(microscope* mic)
 		// update the percentage we finished already
 		percDone = ((float) iY) / ((float) nY) * 100;
 
-		// save data to file if flag was enabled
-		if (flagSaveData)
+		if (flagSaveData) // save last b scan to file if data saving is enabled
 			save_data(iY);
 	}
 
@@ -156,7 +155,22 @@ void scanprocedure::set_flagSaveData(const bool _flagSaveData)
 void scanprocedure::save_data(const uint32_t ySlice)
 {
 	cout << "sving data is not implemented yet" << endl;
-	// save 
+	// save data to file through external thread
+	// - make sure previous saving finished if iy > 0
+	// - start saving of b scan
+	// - decouple thread
+
+	return;
+}
+
+void scanprocedure::proc_data(const uint32_t ySlice)
+{
+	cout << "Data processing not implemented yet" << endl;
+	// process data for live preview through external thread
+	// - make sure previous processing is finished if iy > 0
+	// - start processing of b scan
+	// - decouple thread
+	// - save processed data to file and preview matrix
 	return;
 }
 

@@ -21,6 +21,7 @@ static void HelpMarker(const char* desc)
 	return;
 }
 
+// setup the initial window for the scan procedure
 void interface::InitWindow(int *argcp, char**argv)
 {
 
@@ -200,6 +201,8 @@ void interface::SNRScope()
 	return;
 }
 
+// defines all the settings for the scan procedure and allows user to 
+// start a scan
 void interface::ScanProcedure()
 {
 	ImGui::Begin("Scan procedure");
@@ -228,8 +231,6 @@ void interface::ScanProcedure()
 		{
 			ImGui::InputFloat("fSampling [Hz]", scan.get_pfSampling());
 		}
-
-
 	}
 
 
@@ -277,8 +278,6 @@ void interface::ScanProcedure()
 			estimMem / 1024 / 1024 / 1024);
 	}
 
-	
-
 	if (!scan.get_isRunning())
 	{
 		// if scan intenal counting is done but app not yet, we just finishe
@@ -313,4 +312,10 @@ void interface::ScanProcedure()
 
 	ImGui::End();
 	return;
+}
+
+// preview of the scan performed so far (only triggered if scan is running)
+void interface::ScanLivePreview()
+{
+
 }

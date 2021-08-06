@@ -22,21 +22,42 @@ float stage::estimTRequired(const float oldPos, const float newPos)
 // define the position of the stage
 void stage::set_pos(const float _pos)
 {
-	float correctedPos = _pos;
-	if (_pos > maxPos)
-		correctedPos = maxPos;
-
-	if (_pos < minPos)
-		correctedPos = minPos;
-
-	if (correctedPos != pos)
+	if (isConnected)
 	{
-		float tRequired = estimTRequired(pos, correctedPos);
-		cout << "Moving to a new stage position in " << tRequired << " s" << endl;
-		// simulating movement delay
-		int tRequiredMs = (int) (tRequired * 1000 + 0.5);
-		std::this_thread::sleep_for(std::chrono::milliseconds(tRequiredMs));
-		pos = correctedPos;
+		if (isEnabled)
+		{
+			if (isHomed)
+			{
+				float correctedPos = _pos;
+				if (_pos > maxPos)
+					correctedPos = maxPos;
+
+				if (_pos < minPos)
+					correctedPos = minPos;
+
+				if (correctedPos != pos)
+				{
+					float tRequired = estimTRequired(pos, correctedPos);
+					cout << "Moving to a new stage position in " << tRequired << " s" << endl;
+					// simulating movement delay
+					int tRequiredMs = (int) (tRequired * 1000 + 0.5);
+					std::this_thread::sleep_for(std::chrono::milliseconds(tRequiredMs));
+					pos = correctedPos;
+				}
+			}
+			else
+			{
+				printf("[stage] Cannot be moved because stage is not homed\n");
+			}
+		}
+		else
+		{
+			printf("[stage] Cannot be moved because stage is not enabled.\n");
+		}
+	}
+	else
+	{
+		printf("[stage] Cannot be moved because stage is not connected.\n");
 	}
 	return;
 }

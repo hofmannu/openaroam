@@ -28,11 +28,13 @@ private:
 	bool isExpertMode = 0;
 	string scanName = "unknown";
 
-	float* rawDataUs;
+	float* rawDataUs; // raw measured data (stored to disc not RAM)
+	float* procUs; // processed data (stored to RAM)
 	bool isRawDataAllocated = 0;
 
 	void free_memory();
 	void save_data(const uint32_t ySlice);
+	void proc_data(const uint32_t ySlice);
 	void save_settings();
 	uint32_t get_nX() const; // number of lines along x
 	uint32_t get_nY() const; // number of lines along y
@@ -44,6 +46,9 @@ private:
 	bool flagSaveData = 1;
 
 	pathhandler nameHandler;
+
+	thread saveThread; // thread responsible to save data to disc
+	thread processThread; // thread responsible to process everything
 public:
 	scanprocedure();
 	~scanprocedure();
