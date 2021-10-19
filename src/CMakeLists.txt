@@ -18,6 +18,8 @@ target_link_libraries(Interface PUBLIC
 	# ImGuiFileDialog
 )
 
+add_library(DataDefs datadefs.cpp)
+
 
 # add_library(ImGuiFileDialog ImGuiFileDialog.cpp)
 # target_link_libraries(ImGuiFileDialog PUBLIC ImGui)

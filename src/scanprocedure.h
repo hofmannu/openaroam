@@ -7,6 +7,7 @@
 #include <math.h>
 #include "microscope.h"
 #include "pathhandler.h"
+#include "dataprocessor.h"
 #include <thread>
 #include <cstring>
 
@@ -46,6 +47,7 @@ private:
 	bool flagSaveData = 1;
 
 	pathhandler nameHandler;
+	dataprocessor dataProc;
 
 	thread saveThread; // thread responsible to save data to disc
 	thread processThread; // thread responsible to process everything

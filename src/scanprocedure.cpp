@@ -163,7 +163,7 @@ void scanprocedure::save_data(const uint32_t ySlice)
 	return;
 }
 
-void scanprocedure::proc_data(const uint32_t ySlice)
+void scanprocedure::proc_data(const uint32_t ySlice, const float* ptrData)
 {
 	cout << "Data processing not implemented yet" << endl;
 	// process data for live preview through external thread
